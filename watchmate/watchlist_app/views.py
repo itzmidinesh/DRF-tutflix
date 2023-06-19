@@ -8,3 +8,12 @@ def movie_list(request):
         'movies': list(movies.values())
     }
     return JsonResponse(context)
+
+def movie_detail(request, pk):
+    movie =Movie.objects.get(pk=pk)
+    context = {
+        'name': movie.name,
+        'description': movie.description,
+        'active': movie.active
+    }
+    return JsonResponse(context)
