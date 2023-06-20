@@ -2,12 +2,17 @@ from rest_framework import serializers
 from watchlist_app.models import Movie
 
 class MovieSerializer(serializers.ModelSerializer):
+    len_name = serializers.SerializerMethodField()
+    
     class Meta:
         model = Movie
         fields = '__all__'
         # fields = ['id', 'name', 'description']
         # exclude = ['name']
         
+    def get_len_name(self, obj):
+        return len(obj.name)
+    
     # field validation
     def validate_name(self, value):
         if len(value) <2:
