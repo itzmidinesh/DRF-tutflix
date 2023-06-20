@@ -16,8 +16,15 @@ class MovieSerializer(serializers.Serializer):
         instance.save()
         return instance
     
+    # field validation
     def validate_name(self, value):
         if len(value) <2:
             raise serializers.ValidationError('Name must be at least 2 characters long')
         else:
             return value
+   # object level validation    
+    def validate(self, data):
+        if data['name'] == data['description']:
+            raise serializers.ValidationError('Name and description must be different')
+        else:
+            return data
