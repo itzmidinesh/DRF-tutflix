@@ -5,6 +5,6 @@ from .views import WatchListAV, WatchDetailAV, StreamPlatformAV, StreamDetailAV
 urlpatterns = [
     path('list/', WatchListAV.as_view(), name="movie-list"),
     path("<int:pk>", WatchDetailAV.as_view(), name="movie-detail"),
-    path("stream/", StreamPlatformAV.as_view(), name="stream"),
-    path("stream/<int:pk>", StreamDetailAV.as_view(), name='stream-detail'),
+    path("stream/", StreamPlatformAV.as_view(), name="stream-list"),
+    path("stream/<int:pk>", StreamDetailAV.as_view(), name='streamplatform-detail'),
 ]
