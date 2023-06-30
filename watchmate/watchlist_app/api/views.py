@@ -36,7 +36,7 @@ class StreamPlatformAV(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
  
-class StreamDetailAV(APIView):
+class StreamPlatformDetailAV(APIView):
     def get(self, request, pk):
         try:
             platform = StreamPlatform.objects.get(pk=pk)
