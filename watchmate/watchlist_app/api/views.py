@@ -68,13 +68,13 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 #         return Response(serializer.errors,
 #                         status=status.HTTP_400_BAD_REQUEST)
 
-# class StreamPlatformVS(viewsets.ModelViewSet):
-#     queryset = StreamPlatform.objects.all()
-#     serializer_class = StreamPlatformSerializer
-
-class StreamPlatformVS(viewsets.ReadOnlyModelViewSet):
+class StreamPlatformVS(viewsets.ModelViewSet):
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
+
+# class StreamPlatformVS(viewsets.ReadOnlyModelViewSet):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
 class StreamPlatformAV(APIView):
     def get(self, request):
