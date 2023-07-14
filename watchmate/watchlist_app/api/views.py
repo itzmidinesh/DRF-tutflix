@@ -13,6 +13,19 @@ from watchlist_app.api.serializers import (WatchListSerializer,
                                            ReviewSerializer)
 from watchlist_app.api.throttling import ReviewCreateThrottle, ReviewListThrottle
 
+class UserReview(generics.ListAPIView):
+    # queryset = Review.objects.all()
+    # throttle_classes = [ReviewListThrottle, AnonRateThrottle]
+    serializer_class = ReviewSerializer
+    # permission_classes = [IsAuthenticated]
+    # def get_queryset(self):
+    #     username =self.kwargs['username']
+    #     return Review.objects.filter(review_user__username=username)
+    def get_queryset(self):
+        username = self.request.query_params.get('username',None)
+        return Review.objects.filter(review_user__username=username)
+        
+
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]
@@ -48,6 +61,8 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer
     permission_classes = [IsReviewUserOrReadOnly]
     throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'review-detail'
+    
 # class ReviewDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
 #     queryset = Review.objects.all()
 #     serializer_class = ReviewSerializer
